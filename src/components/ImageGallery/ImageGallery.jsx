@@ -1,15 +1,36 @@
+import React from "react";
+import PropTypes from 'prop-types';
 import { Gallery } from "./ImageGallery.styled";
-import { GalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
 
+import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
 
-export const ImageGallery = ({ galleryItems }) => {
+export const ImageGallery = ({ images }) => {
+    return (
+        <Gallery>
+            {images.map(image => (
+                <ImageGalleryItem key={image.id} image={image} />
+            ))}
+        </Gallery>
+    );
+};
+
+ImageGallery.propTypes = {
+    images: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+        })
+    ).isRequired,
+};
+
+/*export const ImageGallery = ({ galleryItems }) => {
     return (
         <Gallery>
             {galleryItems.map(galleryItem => {
                 return (
-                    <GalleryItem key={galleryItem.id} galleryItem={galleryItem} />
+                    <ImageGalleryItem key={galleryItem.id} galleryItem={galleryItem} />
                 );
             })}
         </Gallery>
     );
-};
+};*/
+

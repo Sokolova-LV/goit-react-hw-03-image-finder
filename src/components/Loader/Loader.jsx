@@ -2,7 +2,7 @@ import { LineWave } from "react-loader-spinner";
 
 export const Loader = () => {
     return (
-        <LineWave
+        <LineWave>
             height="100"
             width="100"
             color="#4fa94d"
@@ -13,7 +13,6 @@ export const Loader = () => {
             firstLineColor=""
             middleLineColor=""
             lastLineColor=""
-        />        
-    )
-}
-
+        </LineWave>
+    );
+};

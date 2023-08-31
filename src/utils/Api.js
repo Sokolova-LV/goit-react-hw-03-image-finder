@@ -1,18 +1,35 @@
 import axios from "axios";
 
-const API_KEY = '36691482-84c9306078cd4b2d6bb1013dd';
-const BASE_URL = 'https://pixabay.com/api/';
+/*const BASE_URL = 'https://pixabay.com/api/';*/
 
-export default class Api {
+axios.defaults.baseURL = 'https://pixabay.com/api/';
+
+const API_KEY = '36691482-84c9306078cd4b2d6bb1013dd';
+
+export const perPage = 12;
+
+export const getImages = async (query, page) => {
+    const response = await axios.get(
+        `?key=${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`
+    );
+    return response.data;
+};
+
+export const normalizedImages = imagesArray =>
+    imagesArray.map(({ id, tags, webformatURL, largeImageURL }) => {
+        return { id, tags, webformatURL, largeImageURL };
+    });
+
+/*export default class Api {
     constructor() {
-        this.query = '';
+        this.searchQuery = '';
         this.page = 1;
         this.totalHits = 0;
     }
 
     async fetchImage() {
-        const PARAMETERS = new SearchURL({
-            q: this.query,
+        const PARAMETERS = new URLSearchParams({
+            q: this.searchQuery,
             page: this.page,
             key: API_KEY,
             image_type: 'photo',
@@ -30,11 +47,11 @@ export default class Api {
     }
 
     get query() {
-        return this.query;
+        return this.searchQuery;
     }
 
     set query(newQuery) {
-        this.query = newQuery;
+        this.searchQuery = newQuery;
     }
 
     get hits() {
@@ -52,6 +69,6 @@ export default class Api {
     resetPage() {
         this.page = 1;
     }
-}
+}*/
 
 
