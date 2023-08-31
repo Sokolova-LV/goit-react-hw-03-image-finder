@@ -5,17 +5,17 @@ import { Modal } from "components/Modal/Modal";
 
 export class ImageGalleryItem extends Component {
     state = {
-        showModal: false,
+        modalOpen: false,
     };
 
     toggleModal = () => {
-        this.setState(({ showModal }) => ({
-            showModal: !showModal,
+        this.setState(({ modalOpen }) => ({
+            modalOpen: !modalOpen,
         }));
     };
 
     render() {
-        const { showModal } = this.state;
+        const { modalOpen } = this.state;
         const { image } = this.props;
 
         return (
@@ -26,7 +26,7 @@ export class ImageGalleryItem extends Component {
                         alt={image.tags}
                         onClick={this.toggleModal}
                     />
-                    {showModal && (
+                    {modalOpen && (
                         <Modal
                             largeImageURL={image.largeImageURL}
                             tags={image.tags}
@@ -46,35 +46,3 @@ ImageGalleryItem.propTypes = {
         largeImageURL: PropTypes.string.isRequired,
     }).isRequired,
 };
-
-/*export class ImageGalleryItem extends Component {
-    state = {
-        isModalOpen: false,
-    };
-
-    toggleModal = () => {
-        this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen }));
-    };
-
-    render() {
-        const {
-            galleryItem: { webformatURL, largeImageURL, alt },
-        } = this.props;
-
-        return (
-            <>
-                <GalleryItem onClick={this.toggleModal}>
-                    <GalleryImage src={webformatURL} alt={alt} />
-                </GalleryItem>
-                {
-                this.state.isModalOpen && (
-                    <Modal
-                        largeImageURL={largeImageURL}
-                        alt={alt}
-                        onCloseModal={this.toggleModal}
-                    />
-                )}
-            </>
-        );
-    }
-};*/

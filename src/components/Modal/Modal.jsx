@@ -4,22 +4,20 @@ import { Overlay, ModalContent } from "./Modal.styled";
 
 export class Modal extends Component {
     componentDidMount() {
-        window.addEventListener('keydown', this.handleKeydown);
-        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', this.keydownClick);
     }
 
     componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleKeydown);
-        document.body.style.overflow = 'visible';
+        window.removeEventListener('keydown', this.keydownClick);
     }
 
-    handleKeydown = e => {
+    keydownClick = e => {
         if (e.code === 'Escape') {
             this.props.onClose();
         }
     };
 
-    handleBackdropClick = e => {
+    backdropClick = e => {
         if (e.currentTarget === e.target) {
             this.props.onClose();
         }
@@ -29,7 +27,7 @@ export class Modal extends Component {
         const { largeImageURL, tags } = this.props;
 
         return (
-            <Overlay onClick={this.handleBackdropClick}>
+            <Overlay onClick={this.backdropClick}>
                 <ModalContent>
                     <img src={largeImageURL} alt={tags} />
                 </ModalContent>
@@ -43,37 +41,3 @@ Modal.propTypes = {
     tags: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
 };
-
-/*export class Modal extends Component {
-    componentDidMount() {
-        window.addEventListener('keydown', this.keydownClick);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.keydownClick);
-    }
-
-    keydownClick = e => {
-        if (e.code === 'Escape') {
-            this.props.onCloseModal();
-        }
-    };
-
-    backdropClick = ({ target, currentTarget }) => {
-        if (currentTarget === target) {
-            this.props.onCloseModal();
-        }
-    };
-
-    render() {
-        const { largeImageURL, alt } = this.props;
-        
-        return (
-        <Overlay onClick={this.backdropClick}>
-            <ModalContent>
-                <img src={largeImageURL} alt={alt} />
-            </ModalContent>
-        </Overlay>
-        );
-    }
-};*/
