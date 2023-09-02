@@ -11,11 +11,6 @@ import {
 export default class Searchbar extends Component {
     state = {
         searchName: '',
-        inputValue: '',
-    };
-
-    handleChange = e => {
-        this.setState({ inputValue: e.target.value });
     };
 
     handleSubmit = e => {
@@ -34,9 +29,7 @@ export default class Searchbar extends Component {
                         autocomplete="off"
                         autoFocus
                         placeholder="Search images and photos"
-                        name="searchName"
-                        value={this.state.inputValue}
-                        onChange={this.handleChange}
+                        name='searchName'
                     />
                     
                     <SearchButton>
